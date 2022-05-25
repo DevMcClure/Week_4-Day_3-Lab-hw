@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS authors;
 
 CREATE TABLE authors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR
-    
+    first_name VARCHAR,
+    last_name VARCHAR
 );
 
 

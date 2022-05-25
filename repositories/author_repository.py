@@ -6,8 +6,8 @@ from models.author import Author
 
 
 def save(author):
-    sql = "INSERT INTO authors (name) VALUES (?) RETURNING *"
-    values = [author.name]
+    sql = "INSERT INTO authors (first_name, last_name) VALUES (?, ?) RETURNING *"
+    values = [author.first_name, author.last_name]
     results = run_sql(sql,values)
     id = results[0]['id']
     author.id = id
@@ -22,10 +22,14 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        author = Author(row['name'])
-        author.append(author)
+        author = Author(row['first_name'], row['last_name'], row['id'])
+        authors.append(author)
     return authors    
 
+
+def delete_all():
+    sql= "DELETE FROM authors"
+    run_sql(sql)
 
 
 
