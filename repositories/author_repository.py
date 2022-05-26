@@ -14,6 +14,11 @@ def save(author):
     return author
 
 
+def delete_all():
+    sql= "DELETE FROM authors"
+    run_sql(sql)
+
+
 
 def select_all():
     authors = []
@@ -22,14 +27,21 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        author = Author(row['first_name'], row['last_name'], row['id'])
+        author = Author(row['first_name'], row['last_name'], row['author_id'])
         authors.append(author)
     return authors    
 
+def select(id):
+    author = None
+    sql = "SELECT * FROM authors WHERE author_id = ?"
+    values = [id]
+    result = run_sql(sql, values)[0]
 
-def delete_all():
-    sql= "DELETE FROM authors"
-    run_sql(sql)
+    if result is not None:
+        author = Author(result['first_name'], result['last_name'], result['author_id'] )
+    return author
+
+
 
 
 
